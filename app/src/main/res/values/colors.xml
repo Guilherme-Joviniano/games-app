@@ -15,4 +15,7 @@
     <color name="text_begie">#A8A8A8</color>
     <color name="transparent">#00000000</color>
     <color name="secondary_color">#E5E5E5</color>
+    <color name="dark_blue">#1976D2</color>
+    <color name="blue_gradient_light">#63A3FF</color>
+    <color name="yellow_text">#E3DF6E</color>
 </resources>
