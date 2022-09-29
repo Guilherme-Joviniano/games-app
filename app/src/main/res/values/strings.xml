@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">games</string>
+    <string name="title">Login</string>
+    <string name="welcome">Bem-vindo!</string>
+    <string name="explain_body">Com o nosso aplicativo será muito mais fácil e divertido manter o controle dos seus games!</string>
+    <string name="check_box_text">Lembrar-me</string>
+    <string name="btn_login">Entrar</string>
+    <string name="btn_sing_up">Criar uma Conta</string>
+    <string name="hint_email">E-mail</string>
+    <string name="hint_password">Senha</string>
+</resources>
