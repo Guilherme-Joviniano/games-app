@@ -20,8 +20,9 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.75" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.54375" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.75" />
-        <entry key="app/src/main/res/layout/activity_user_home.xml" value="0.5940685820203893" />
+        <entry key="app/src/main/res/layout/activity_user_home.xml" value="0.625" />
         <entry key="app/src/main/res/layout/user_home_activity.xml" value="0.484375" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.41" />
       </map>
     </option>
   </component>
