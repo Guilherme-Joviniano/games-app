@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun authenticate() {
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +36,11 @@ class MainActivity : AppCompatActivity() {
             val openRegisterActivity = Intent(this, RegisterActivity::class.java)
             startActivity(openRegisterActivity)
          }
+
+        binding.LoginButton.setOnClickListener {
+            val openHomeUserHomeActivity = Intent(this, UserHomeActivity::class.java)
+            startActivity(openHomeUserHomeActivity)
+        }
     }
 
 }

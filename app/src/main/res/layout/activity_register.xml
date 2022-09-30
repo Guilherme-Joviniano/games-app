@@ -26,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView5"
@@ -47,6 +47,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -121,13 +122,14 @@
                     android:layout_marginEnd="32dp"
                     android:backgroundTint="@color/black"
                     android:ems="10"
-                    android:hint="Qual e o seu nome?"
+                    android:hint="@string/hint_name_field"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/black"
                     android:textColorHint="@color/text_begie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
 
                 <TextView
                     android:id="@+id/textView8"
@@ -173,7 +175,7 @@
                     android:drawablePadding="6dp"
                     android:drawableTint="@color/secondary_blue"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Dados para autenticação"
+                    android:text="@string/data_register_question"
                     android:textColor="@color/secondary_blue"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -186,7 +188,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="12dp"
-                    android:text="Qual e o seu nivel gamer?"
+                    android:text="@string/user_gamer_level_question"
                     android:textColor="@color/text_begie"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
@@ -200,7 +202,7 @@
                     android:layout_marginEnd="32dp"
                     android:backgroundTint="@color/black"
                     android:ems="10"
-                    android:hint="Qual e a sua Cidade?"
+                    android:hint="@string/hint_city_field"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/black"
                     android:textColorHint="@color/text_begie"
@@ -218,7 +220,7 @@
                     android:drawablePadding="6dp"
                     android:drawableTint="@color/secondary_blue"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Vamos escolher uma foto?"
+                    android:text="@string/picture_user_question"
                     android:textColor="@color/secondary_blue"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -234,7 +236,7 @@
                     android:layout_marginEnd="32dp"
                     android:backgroundTint="@color/black"
                     android:ems="10"
-                    android:hint="Data de nascimento"
+                    android:hint="@string/hint_birthday_field"
                     android:inputType="date"
                     android:minHeight="48dp"
                     android:textColor="@color/black"
@@ -286,37 +288,32 @@
                     android:layout_height="61dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView13">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                    <RadioButton
+                        android:id="@+id/radioButton3"
+                        android:layout_width="114dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="12dp"
+                        android:buttonTint="@color/text_begie"
+                        android:text="@string/female_field"
+                        android:textColor="@color/text_begie"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <RadioButton
-                            android:id="@+id/radioButton3"
-                            android:layout_width="114dp"
-                            android:layout_height="30dp"
-                            android:layout_marginTop="12dp"
-                            android:buttonTint="@color/text_begie"
-                            android:text="Feminino"
-                            android:textColor="@color/text_begie"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <RadioButton
-                            android:id="@+id/radioButton4"
-                            android:layout_width="114dp"
-                            android:layout_height="30dp"
-                            android:layout_marginStart="12dp"
-                            android:layout_marginTop="12dp"
-                            android:buttonTint="@color/text_begie"
-                            android:text="Masculino"
-                            android:textColor="@color/text_begie"
-                            app:layout_constraintStart_toEndOf="@+id/radioButton3"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <RadioButton
+                        android:id="@+id/radioButton4"
+                        android:layout_width="114dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:buttonTint="@color/text_begie"
+                        android:text="@string/masculine_field"
+                        android:textColor="@color/text_begie"
+                        app:layout_constraintStart_toEndOf="@+id/radioButton3"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </RadioGroup>
 
                 <TextView
@@ -324,7 +321,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Sexo:"
+                    android:text="@string/user_genre_question"
                     android:textColor="@color/text_begie"
                     app:layout_constraintStart_toStartOf="@+id/spinner"
                     app:layout_constraintTop_toBottomOf="@+id/spinner" />
@@ -334,7 +331,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Qual o seu console preferido?"
+                    android:text="@string/user_prefer_console"
                     android:textColor="@color/text_begie"
                     app:layout_constraintStart_toStartOf="@+id/seekBar5"
                     app:layout_constraintTop_toBottomOf="@+id/seekBar5" />
@@ -342,47 +339,5 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:background="@color/secondary_blue"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="11dp"
-        android:paddingTop="9dp"
-        android:paddingEnd="11dp"
-        android:paddingBottom="9dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_baseline_arrow_back_24"
-            app:tint="@color/white" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="59dp"
-            android:layout_height="23dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/roboto_regular"
-            android:paddingStart="10dp"
-            android:text="Games"
-            android:textColor="@color/begie_secondary"
-            android:textSize="18sp" />
-
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_baseline_save_24"
-            app:tint="@color/white" />
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
