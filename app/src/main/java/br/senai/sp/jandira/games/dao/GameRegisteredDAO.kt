@@ -1,8 +1,8 @@
-package br.senai.sp.jandira.games.daos
+package br.senai.sp.jandira.games.dao
 
 import android.content.Context
 import br.senai.sp.jandira.games.R
-import br.senai.sp.jandira.games.models.GameRegistered
+import br.senai.sp.jandira.games.model.GameRegistered
 
 class GameRegisteredDAO {
     companion object {

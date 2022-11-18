@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.senai.sp.jandira.games.R
-import br.senai.sp.jandira.games.models.GameRegistered
+import br.senai.sp.jandira.games.model.GameRegistered
 
 class GameRegisteredAdapter(context: Context) : RecyclerView.Adapter<GameRegisteredAdapter.GameRegisteredHolder>() {
 

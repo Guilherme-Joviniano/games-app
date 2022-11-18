@@ -1,4 +1,4 @@
-package br.senai.sp.jandira.games.models
+package br.senai.sp.jandira.games.model
 import android.graphics.drawable.Drawable
 import java.util.concurrent.atomic.AtomicLong
 

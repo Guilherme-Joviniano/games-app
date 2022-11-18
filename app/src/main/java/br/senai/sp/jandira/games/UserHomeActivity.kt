@@ -1,6 +1,5 @@
 package br.senai.sp.jandira.games
 
-import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,9 +9,10 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.senai.sp.jandira.games.adapters.GameRegisteredAdapter
-import br.senai.sp.jandira.games.daos.GameRegisteredDAO
+import br.senai.sp.jandira.games.dao.GameRegisteredDAO
 import br.senai.sp.jandira.games.databinding.ActivityUserHomeBinding
-import br.senai.sp.jandira.games.models.GameRegistered
+import br.senai.sp.jandira.games.model.GameRegistered
+import br.senai.sp.jandira.games.repository.UserRepository
 
 class UserHomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserHomeBinding
@@ -34,11 +34,18 @@ class UserHomeActivity : AppCompatActivity() {
         )
 
         binding.rvGameRegistered.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
         this.adapterGameRegisterd = GameRegisteredAdapter(this)
-        bindGameRegistered(GameRegisteredDAO.list(this))
 
+        bindGameRegistered(GameRegisteredDAO.list(this))
         binding.rvGameRegistered.adapter = this.adapterGameRegisterd
+
+        val userId = intent.getIntExtra("user_id", -1)
+
+        val user = UserRepository(this).getUserById(userId)
+
+        binding.userName.text = user.user_name
+        binding.userEmail.text = user.email
+        binding.userLevel.text = user.level.toString()
     }
 
     private fun bindGameRegistered(data: List<GameRegistered>) {
