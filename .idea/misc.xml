@@ -21,8 +21,9 @@
         <entry key="app/src/main/res/drawable/user_data_bg.xml" value="0.41" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.75" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.54375" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.625" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.55" />
         <entry key="app/src/main/res/layout/activity_user_home.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/card_games_holder.xml" value="0.575" />
         <entry key="app/src/main/res/layout/user_home_activity.xml" value="0.484375" />
         <entry key="app/src/main/res/menu/menu_register_user.xml" value="0.5619791666666667" />
         <entry key="app/src/main/res/menu/menu_user_home.xml" value="0.5" />

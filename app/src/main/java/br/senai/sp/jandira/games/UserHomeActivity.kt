@@ -8,10 +8,15 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import br.senai.sp.jandira.games.adapters.GameRegisteredAdapter
+import br.senai.sp.jandira.games.daos.GameRegisteredDAO
 import br.senai.sp.jandira.games.databinding.ActivityUserHomeBinding
+import br.senai.sp.jandira.games.models.GameRegistered
 
 class UserHomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserHomeBinding
+    private lateinit var adapterGameRegisterd: GameRegisteredAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +33,16 @@ class UserHomeActivity : AppCompatActivity() {
             )
         )
 
+        binding.rvGameRegistered.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        this.adapterGameRegisterd = GameRegisteredAdapter(this)
+        bindGameRegistered(GameRegisteredDAO.list(this))
+
+        binding.rvGameRegistered.adapter = this.adapterGameRegisterd
+    }
+
+    private fun bindGameRegistered(data: List<GameRegistered>) {
+        this.adapterGameRegisterd.updateList(data)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
