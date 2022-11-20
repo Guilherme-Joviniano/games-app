@@ -13,7 +13,7 @@ import br.senai.sp.jandira.games.repository.UserRepository
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var user: UserModel
+    private var user: UserModel? = null
 
     private fun validateForm():Boolean {
         if (binding.PasswordField.text.isEmpty()) {
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Email nao encontrado, faca um cadastro!", Toast.LENGTH_SHORT).show()
             return false
         }
-        if (binding.PasswordField.text.toString() != user.password) {
+        if (binding.PasswordField.text.toString() != user?.password) {
             Toast.makeText(this, "Senha incorreta", Toast.LENGTH_SHORT).show()
             return false
         }
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             else {
                 val openHomeUserHomeActivity = Intent(this, UserHomeActivity::class.java)
 
-                openHomeUserHomeActivity.putExtra("user_id", user.userId)
+                openHomeUserHomeActivity.putExtra("user_id", user?.userId)
 
                 startActivity(openHomeUserHomeActivity)
             }

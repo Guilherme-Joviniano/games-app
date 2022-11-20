@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.games
 
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,10 +15,24 @@ import br.senai.sp.jandira.games.model.UserModel
 import br.senai.sp.jandira.games.model.enums.Level
 import br.senai.sp.jandira.games.repository.ConsoleRepository
 import br.senai.sp.jandira.games.repository.UserRepository
+import android.content.ContentResolver
+
+import android.graphics.Bitmap
+import android.net.Uri
+
+import android.os.ParcelFileDescriptor
+import android.provider.MediaStore
+import android.view.View
+import androidx.core.view.isInvisible
+import br.senai.sp.jandira.games.helpers.getBitmapFromUri
+import java.io.ByteArrayOutputStream
+
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var user: UserModel
+    private val IMAGE_REQUEST_CODE = 100
+    private lateinit var pictureBitmap: Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +44,15 @@ class RegisterActivity : AppCompatActivity() {
         supportActionBar?.setBackgroundDrawable(ColorDrawable(
             ContextCompat.getColor(this, R.color.secondary_blue)
         ))
+
         supportActionBar?.elevation = 0F
+
+        binding.userPictureImageView.setOnClickListener{
+            pickImageGallery()
+        }
+        binding.choosedImageImageView.visibility = View.INVISIBLE
+
+
         adapterSpinner()
         setupSlider()
     }
@@ -43,7 +66,8 @@ class RegisterActivity : AppCompatActivity() {
         var city = ""
         var birthday = ""
         var level: Level = Level.CASUAL
-        var console: ConsoleModel = ConsoleModel(console_name = "Playstation 5", description = "Last sony console", launchedYear = 2021, manufacturer = "Sony", picture = ByteArray(10))
+        var console: ConsoleModel = ConsoleModel(console_name = "Playstation 5", description = "Last sony console", launchedYear = 2021, manufacturer = "Sony", console_picture = ByteArray(1))
+        var picture: ByteArray = ByteArray(0)
 
         try {
             email = binding.EmailRegisterField.text.toString()
@@ -54,15 +78,16 @@ class RegisterActivity : AppCompatActivity() {
             level = getSliderText(binding.slider.value.toInt())
             genre = binding.genreRadioGroup.checkedRadioButtonId.toString()
             console = ConsoleRepository(this).getContactByName(getSpinnerValue())
+            picture = getByteArrayFromBitmap(pictureBitmap)
 
             return UserModel(name, email, password, city, birthday,
-               level, gender = genre[0], console = console)
+               level, gender = genre[0], console = console, user_picture = picture)
 
         } catch (exception: Exception) {
             Toast.makeText(this, "${exception}", Toast.LENGTH_SHORT).show()
         }
         return UserModel(name, email, password, city, birthday,
-            Level.AMADOR, gender = 'M', console = console)
+            Level.AMADOR, gender = 'M', console = console, user_picture = picture)
     }
 
     private fun getSpinnerValue(): String {
@@ -71,7 +96,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun adapterSpinner() {
         val listOfConsoles = ConsoleRepository(this).getAll().map { e -> e.console_name }
-        binding.spinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listOfConsoles)
+        binding.spinner.adapter = ArrayAdapter(this, R.layout.spinner_item, listOfConsoles)
     }
 
     private fun setupSlider() {
@@ -88,7 +113,30 @@ class RegisterActivity : AppCompatActivity() {
         return  Level.PROFISSIONAL
     }
 
+    private fun pickImageGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_REQUEST_CODE)
+    }
 
+    private fun getByteArrayFromBitmap(bitmap: Bitmap):ByteArray {
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
+        return stream.toByteArray()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
+            pictureBitmap = getBitmapFromUri(data?.data, this)
+
+            binding.userPictureImageView.visibility = View.INVISIBLE
+            binding.choosedImageImageView.visibility = View.VISIBLE
+
+            binding.choosedImageImageView.setImageBitmap(pictureBitmap)
+
+        }
+    }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_register_user, menu)
         return true

@@ -1,5 +1,7 @@
 package br.senai.sp.jandira.games
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,12 +9,18 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.senai.sp.jandira.games.adapters.GameRegisteredAdapter
 import br.senai.sp.jandira.games.dao.GameRegisteredDAO
 import br.senai.sp.jandira.games.databinding.ActivityUserHomeBinding
+import br.senai.sp.jandira.games.helpers.getBitmapFromByteArray
 import br.senai.sp.jandira.games.model.GameRegistered
 import br.senai.sp.jandira.games.repository.UserRepository
+import java.io.ByteArrayInputStream
+import java.time.Year
+import java.util.*
+import java.util.jar.Manifest
 
 class UserHomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserHomeBinding
@@ -42,10 +50,14 @@ class UserHomeActivity : AppCompatActivity() {
         val userId = intent.getIntExtra("user_id", -1)
 
         val user = UserRepository(this).getUserById(userId)
+        val age = Year.now().value - ((user.birthday?.substring(user.birthday.toString().length - 4))?.toInt()
+            ?: Year.now().value)
 
         binding.userName.text = user.user_name
         binding.userEmail.text = user.email
         binding.userLevel.text = user.level.toString()
+        binding.textViewUserAge.text = age.toString()
+        binding.userProfilePicture.setImageBitmap(getBitmapFromByteArray(user.user_picture))
     }
 
     private fun bindGameRegistered(data: List<GameRegistered>) {

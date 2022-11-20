@@ -11,7 +11,7 @@ data class ConsoleModel (
     val console_name: String,
     val manufacturer: String,
     val description: String,
-    val picture: ByteArray,
+    val console_picture: ByteArray,
     @ColumnInfo(name = "launched_year") var launchedYear:Int? = null
 ) {
     @PrimaryKey(autoGenerate = true) var consoleId: Int = 0;

@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.games.model
 
+import android.graphics.Bitmap
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
@@ -16,7 +17,8 @@ data class UserModel (
     @ColumnInfo(name = "birthday") var birthday: String? = null,
     val level: Level,
     @Embedded val console: ConsoleModel?,
-    val gender: Char
+    val gender: Char,
+    val user_picture: ByteArray
     ) {
     @PrimaryKey(autoGenerate = true) var userId: Int = 0;
 }
