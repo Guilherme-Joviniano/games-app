@@ -9,7 +9,10 @@ interface UserDAO {
     fun getAll(): List<UserModel>
 
     @Query("SELECT * FROM tbl_user WHERE userId = :id")
-    fun getContactById(id: Int): UserModel
+    fun getUserById(id: Int): UserModel
+
+    @Query("SELECT * FROM TBL_USER where email = :email")
+    fun getUserByEmail(email: String): UserModel
 
     @Update
     fun update(user: UserModel): Int

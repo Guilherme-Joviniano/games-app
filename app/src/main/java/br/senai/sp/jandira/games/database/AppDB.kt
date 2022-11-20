@@ -18,7 +18,7 @@ abstract class AppDB: RoomDatabase() {
         private lateinit var instance: AppDB
         fun getDatabase(context: Context): AppDB {
             if (!::instance.isInitialized) {
-                instance = Room.databaseBuilder(context, AppDB::class.java, "db_agenda").allowMainThreadQueries().build()
+                instance = Room.databaseBuilder(context, AppDB::class.java, "db_app_game").allowMainThreadQueries().build()
             }
             return instance
         }

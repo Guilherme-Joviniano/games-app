@@ -52,7 +52,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -61,8 +62,10 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="419dp"
                 android:layout_height="829dp"
+                android:layout_marginTop="32dp"
                 android:backgroundTint="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -97,7 +100,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <EditText
-                    android:id="@+id/editTextTextPassword"
+                    android:id="@+id/passwordRegisterField"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_marginStart="32dp"
@@ -146,7 +149,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+                    app:layout_constraintTop_toBottomOf="@+id/passwordRegisterField" />
 
                 <EditText
                     android:id="@+id/EmailRegisterField"
@@ -191,10 +194,10 @@
                     android:text="@string/user_gamer_level_question"
                     android:textColor="@color/text_begie"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+                    app:layout_constraintTop_toBottomOf="@+id/birthdayField" />
 
                 <EditText
-                    android:id="@+id/nameField2"
+                    android:id="@+id/cityField"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_marginStart="32dp"
@@ -207,6 +210,7 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/text_begie"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/nameField" />
 
@@ -228,7 +232,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/editTextDate"
+                    android:id="@+id/birthdayField"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -243,22 +247,25 @@
                     android:textColorHint="@color/text_begie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nameField2" />
+                    app:layout_constraintTop_toBottomOf="@+id/cityField" />
 
                 <com.google.android.material.slider.Slider
-                    android:id="@+id/seekBar5"
+                    android:id="@+id/slider"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="14dp"
                     android:backgroundTint="@color/blue"
                     android:progressTint="@color/blue"
+                    android:stepSize="10"
                     android:thumbTint="@color/blue"
+                    android:valueFrom="0"
+                    android:valueTo="100"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/sliderRefText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -268,8 +275,8 @@
                     android:textColor="@color/blue"
                     android:textSize="24sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/seekBar5"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+                    app:layout_constraintStart_toEndOf="@+id/slider"
+                    app:layout_constraintTop_toBottomOf="@+id/birthdayField" />
 
                 <Spinner
                     android:id="@+id/spinner"
@@ -278,12 +285,14 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
+                    android:spinnerMode="dialog"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/seekBar5" />
+                    app:layout_constraintTop_toBottomOf="@+id/slider" />
 
                 <RadioGroup
+                    android:id="@+id/genreRadioGroup"
                     android:layout_width="250dp"
                     android:layout_height="61dp"
                     android:layout_marginStart="32dp"
@@ -293,7 +302,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView13">
 
                     <RadioButton
-                        android:id="@+id/radioButton3"
+                        android:id="@+id/female"
                         android:layout_width="114dp"
                         android:layout_height="30dp"
                         android:layout_marginTop="12dp"
@@ -304,7 +313,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <RadioButton
-                        android:id="@+id/radioButton4"
+                        android:id="@+id/male"
                         android:layout_width="114dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="12dp"
@@ -312,7 +321,7 @@
                         android:buttonTint="@color/text_begie"
                         android:text="@string/masculine_field"
                         android:textColor="@color/text_begie"
-                        app:layout_constraintStart_toEndOf="@+id/radioButton3"
+                        app:layout_constraintStart_toEndOf="@+id/female"
                         app:layout_constraintTop_toTopOf="parent" />
                 </RadioGroup>
 
@@ -333,8 +342,8 @@
                     android:layout_marginTop="12dp"
                     android:text="@string/user_prefer_console"
                     android:textColor="@color/text_begie"
-                    app:layout_constraintStart_toStartOf="@+id/seekBar5"
-                    app:layout_constraintTop_toBottomOf="@+id/seekBar5" />
+                    app:layout_constraintStart_toStartOf="@+id/slider"
+                    app:layout_constraintTop_toBottomOf="@+id/slider" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

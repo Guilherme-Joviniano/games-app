@@ -10,8 +10,13 @@ class UserRepository(context: Context) {
     fun getAll(): List<UserModel> {
         return db.getAll()
     }
-    fun getContactById(id: Int): UserModel {
-        return db.getContactById(id)
+
+    fun getUserByEmail(email: String): UserModel {
+        return db.getUserByEmail(email)
+    }
+
+    fun getUserById(id: Int): UserModel {
+        return db.getUserById(id)
     }
     fun save(user: UserModel): Long {
         return db.save(user)

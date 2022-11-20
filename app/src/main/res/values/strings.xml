@@ -20,4 +20,14 @@
     <string name="masculine_field">Masculino</string>
     <string name="actionBar_profile_title">Seu Perfil!</string>
     <string name="actionBar_register_title">Criar uma Conta!</string>
+
+    <string-array name="consoles">
+        <item>Playstation 5</item>
+        <item>Xbox One</item>
+        <item>Nintendo Switch</item>
+        <item>Super Nintendo</item>
+        <item>Nintendo 64</item>
+        <item>Sega Saturn</item>
+    </string-array>
+
 </resources>

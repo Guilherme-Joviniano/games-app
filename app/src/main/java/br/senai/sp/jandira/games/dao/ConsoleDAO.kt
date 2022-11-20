@@ -9,7 +9,10 @@ interface ConsoleDAO {
     fun getAll(): List<ConsoleModel>
 
     @Query("SELECT * FROM tbl_console WHERE consoleId = :id")
-    fun getContactById(id: Int): ConsoleModel
+    fun getConsoleById(id: Int): ConsoleModel
+
+    @Query("SELECT * FROM tbl_console WHERE console_name = :name")
+    fun getConsoleByName(name: String): ConsoleModel
 
     @Update
     fun update(console: ConsoleModel): Int

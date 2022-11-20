@@ -12,7 +12,10 @@ class ConsoleRepository(context: Context) {
         return db.getAll()
     }
     fun getContactById(id: Int): ConsoleModel {
-        return db.getContactById(id)
+        return db.getConsoleById(id)
+    }
+    fun getContactByName(name: String): ConsoleModel {
+        return db.getConsoleByName(name)
     }
     fun save(console: ConsoleModel): Long {
         return db.save(console)

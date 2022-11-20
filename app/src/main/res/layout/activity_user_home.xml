@@ -33,7 +33,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/userName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
@@ -45,7 +45,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/userEmail"
                     android:layout_width="158dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
@@ -60,6 +60,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:layout_marginStart="10dp"
                 app:cardCornerRadius="50dp">
 
                 <ImageView
@@ -154,7 +155,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
 
         <TextView
-            android:id="@+id/textView22"
+            android:id="@+id/userLevel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -187,5 +188,18 @@
         app:drawableStartCompat="@drawable/joystick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvGameRegistered"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView21"
+        tools:listitem="@layout/card_games_holder" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
