@@ -16,21 +16,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="252dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout8"
+            android:layout_width="300dp"
             android:layout_height="80dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="13dp"
             android:background="@drawable/user_data_bg"
-            android:orientation="horizontal"
-            android:padding="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                app:cardCornerRadius="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/userProfilePicture"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    app:srcCompat="@drawable/picture" />
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/userName"
@@ -56,38 +74,24 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginStart="10dp"
-                app:cardCornerRadius="50dp">
-
-                <ImageView
-                    android:id="@+id/userProfilePicture"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    app:srcCompat="@drawable/picture" />
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:text="Games Finished"
+            android:layout_marginTop="13dp"
+            android:text="@string/title_finished_game"
             android:textColor="@color/yellow_text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Currently playing"
+            android:text="@string/title_playing_title"
             android:textColor="@color/yellow_text"
             app:layout_constraintEnd_toStartOf="@+id/textView15"
             app:layout_constraintStart_toEndOf="@+id/textView10"
@@ -98,13 +102,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
-            android:text="Age"
+            android:text="@string/title_user_age"
             android:textColor="@color/yellow_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView11" />
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/finishedGamesTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
@@ -117,7 +121,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/playingGamesTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
@@ -145,7 +149,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="-25dp"
         android:background="@drawable/experience_bg"
@@ -180,7 +184,7 @@
         android:drawablePadding="10dp"
         android:fontFamily="@font/roboto_regular"
         android:gravity="bottom"
-        android:text="Seus jogos cadastrados"
+        android:text="@string/title_game_registered"
         android:textAlignment="center"
         android:textColor="@color/dark_blue"
         android:textSize="16sp"

@@ -5,15 +5,19 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import br.senai.sp.jandira.games.dao.ConsoleDAO
+import br.senai.sp.jandira.games.dao.GameDAO
 import br.senai.sp.jandira.games.dao.UserDAO
 import br.senai.sp.jandira.games.model.ConsoleModel
+import br.senai.sp.jandira.games.model.GameModel
 import br.senai.sp.jandira.games.model.UserModel
+import br.senai.sp.jandira.games.model.UserWithGamesModel
 import br.senai.sp.jandira.games.repository.ConsoleRepository
 
-@Database(entities = [UserModel::class, ConsoleModel::class], version = 1)
+@Database(entities = [UserModel::class, ConsoleModel::class, GameModel::class], version = 1)
 abstract class AppDB: RoomDatabase() {
     abstract fun userDAO(): UserDAO
     abstract fun consoleDAO(): ConsoleDAO
+    abstract fun gameDAO(): GameDAO
 
     companion object {
         private lateinit var instance: AppDB

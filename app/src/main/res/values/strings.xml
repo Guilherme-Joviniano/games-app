@@ -20,6 +20,21 @@
     <string name="masculine_field">Masculino</string>
     <string name="actionBar_profile_title">Seu Perfil!</string>
     <string name="actionBar_register_title">Criar uma Conta!</string>
+    <string name="actionBar_register_game_title">Cadastre um Novo Game!</string>
+
+    <string name="title_finished_game">Jogos Finalizados</string>
+    <string name="title_playing_title">Jogando</string>
+    <string name="title_user_age">Idade</string>
+    <string name="title_game_registered">Seus jogos cadastrados</string>
+
+    <string name="hint_title_game">Qual é o nome do jogo ?</string>
+    <string name="hint_desc_game">Qual é a descrição desse game?</string>
+    <string name="hint_studio_game">Qual é o estudio ?</string>
+    <string name="hint_released_year_game">Ano de lançamento</string>
+
+    <string name="radio_input_title_game_register">Já zerou?</string>
+    <string name="radio_input_game_register_true">claro 😉</string>
+    <string name="radio_input_game_register_false">nao 😣</string>
 
     <string-array name="consoles">
         <item>Playstation 5</item>

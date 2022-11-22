@@ -8,13 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.senai.sp.jandira.games.R
-import br.senai.sp.jandira.games.model.GameRegistered
+import br.senai.sp.jandira.games.helpers.getBitmapFromByteArray
+import br.senai.sp.jandira.games.model.GameModel
 
 class GameRegisteredAdapter(context: Context) : RecyclerView.Adapter<GameRegisteredAdapter.GameRegisteredHolder>() {
 
-    private var list = listOf<GameRegistered>(); // list of characters
+    private var list = listOf<GameModel>(); // list of characters
 
-    fun updateList(list: List<GameRegistered>) {
+    fun updateList(list: List<GameModel>) {
         this.list = list
         notifyDataSetChanged()
     }
@@ -25,11 +26,11 @@ class GameRegisteredAdapter(context: Context) : RecyclerView.Adapter<GameRegiste
         private val description = view.findViewById<TextView>(R.id.textViewGameDescription)
         private val imgBanner = view.findViewById<ImageView>(R.id.imageViewBanner)
 
-        fun bind(data: GameRegistered) {
-            name.text = data.gameName
-            owner.text = data.gameOwner
+        fun bind(data: GameModel) {
+            name.text = data.title
+            owner.text = data.studio
             description.text = data.description
-            imgBanner.setImageDrawable(data.img)
+            imgBanner.setImageBitmap(getBitmapFromByteArray(data.game_picture))
         }
 
     }

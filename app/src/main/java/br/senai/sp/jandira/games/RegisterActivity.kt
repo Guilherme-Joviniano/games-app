@@ -10,27 +10,22 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import br.senai.sp.jandira.games.databinding.ActivityRegisterBinding
-import br.senai.sp.jandira.games.model.ConsoleModel
 import br.senai.sp.jandira.games.model.UserModel
 import br.senai.sp.jandira.games.model.enums.Level
 import br.senai.sp.jandira.games.repository.ConsoleRepository
 import br.senai.sp.jandira.games.repository.UserRepository
-import android.content.ContentResolver
 
 import android.graphics.Bitmap
-import android.net.Uri
 
-import android.os.ParcelFileDescriptor
-import android.provider.MediaStore
 import android.view.View
-import androidx.core.view.isInvisible
+import android.widget.EditText
 import br.senai.sp.jandira.games.helpers.getBitmapFromUri
+import br.senai.sp.jandira.games.helpers.getByteArrayFromBitmap
 import java.io.ByteArrayOutputStream
 
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var user: UserModel
     private val IMAGE_REQUEST_CODE = 100
     private lateinit var pictureBitmap: Bitmap
 
@@ -41,13 +36,15 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.title = getString(R.string.actionBar_register_title)
-        supportActionBar?.setBackgroundDrawable(ColorDrawable(
-            ContextCompat.getColor(this, R.color.secondary_blue)
-        ))
+        supportActionBar?.setBackgroundDrawable(
+            ColorDrawable(
+                ContextCompat.getColor(this, R.color.secondary_blue)
+            )
+        )
 
         supportActionBar?.elevation = 0F
 
-        binding.userPictureImageView.setOnClickListener{
+        binding.userPictureImageView.setOnClickListener {
             pickImageGallery()
         }
         binding.choosedImageImageView.visibility = View.INVISIBLE
@@ -57,37 +54,54 @@ class RegisterActivity : AppCompatActivity() {
         setupSlider()
     }
 
+    private fun validateFormData(): Boolean {
+        var validated = true
+
+        val emailField = binding.EmailRegisterField; val passwordField = binding.passwordRegisterField; val nameField = binding.nameField;
+        val cityField = binding.cityField; val birthdayField = binding.birthdayField;
+
+        val inputs = listOf(emailField, passwordField, nameField, cityField, birthdayField)
+
+        inputs.forEach { editText -> if(editText.text.isEmpty()) {
+            editText.error = "preencha o campo"
+            validated = false
+        } }
+
+        if (binding.genderRadioGroup.checkedRadioButtonId.toString().isEmpty()) {
+            Toast.makeText(this, "Preencha o campo de genero", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (binding.choosedImageImageView.visibility === View.INVISIBLE) {
+            Toast.makeText(this, "Escolha uma foto de perfil!", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return validated
+    }
 
     private fun getFormData(): UserModel {
-        var name = ""
-        var genre = ""
-        var email = ""
-        var password = ""
-        var city = ""
-        var birthday = ""
-        var level: Level = Level.CASUAL
-        var console: ConsoleModel = ConsoleModel(console_name = "Playstation 5", description = "Last sony console", launchedYear = 2021, manufacturer = "Sony", console_picture = ByteArray(1))
-        var picture: ByteArray = ByteArray(0)
+        var user = UserModel()
+        var email = binding.EmailRegisterField.text.toString()
+        var password = binding.passwordRegisterField.text.toString()
+        var name = binding.nameField.text.toString()
+        var city = binding.cityField.toString()
+        var birthday = binding.birthdayField.text.toString()
+        var level = getSliderText(binding.slider.value.toInt())
+        var genre = binding.genderRadioGroup.checkedRadioButtonId.toString()
+        var console = ConsoleRepository(this).getConsoleByName(getSpinnerValue())
+        var picture = getByteArrayFromBitmap(this.pictureBitmap)
 
-        try {
-            email = binding.EmailRegisterField.text.toString()
-            password = binding.passwordRegisterField.text.toString()
-            name = binding.nameField.text.toString()
-            city = binding.cityField.toString()
-            birthday = binding.birthdayField.text.toString()
-            level = getSliderText(binding.slider.value.toInt())
-            genre = binding.genreRadioGroup.checkedRadioButtonId.toString()
-            console = ConsoleRepository(this).getContactByName(getSpinnerValue())
-            picture = getByteArrayFromBitmap(pictureBitmap)
+        user.email = email
+        user.password = password
+        user.user_name = name
+        user.city = city
+        user.birthday = birthday
+        user.level = level
+        user.gender = genre[0]
+        user.console = console
+        user.user_picture = picture
 
-            return UserModel(name, email, password, city, birthday,
-               level, gender = genre[0], console = console, user_picture = picture)
-
-        } catch (exception: Exception) {
-            Toast.makeText(this, "${exception}", Toast.LENGTH_SHORT).show()
-        }
-        return UserModel(name, email, password, city, birthday,
-            Level.AMADOR, gender = 'M', console = console, user_picture = picture)
+        return user
     }
 
     private fun getSpinnerValue(): String {
@@ -106,11 +120,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun getSliderText(pos: Int): Level {
-        if (pos <= 20) return  Level.AMADOR
+        if (pos <= 20) return Level.AMADOR
         if (pos in 21..40) return Level.CASUAL
-        if (pos in 41..60) return  Level.ENTUSIASTA
-        if (pos in 61..80) return  Level.TRYHARD
-        return  Level.PROFISSIONAL
+        if (pos in 41..60) return Level.ENTUSIASTA
+        if (pos in 61..80) return Level.TRYHARD
+        return Level.PROFISSIONAL
     }
 
     private fun pickImageGallery() {
@@ -119,15 +133,9 @@ class RegisterActivity : AppCompatActivity() {
         startActivityForResult(intent, IMAGE_REQUEST_CODE)
     }
 
-    private fun getByteArrayFromBitmap(bitmap: Bitmap):ByteArray {
-        val stream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
-        return stream.toByteArray()
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
+        if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
             pictureBitmap = getBitmapFromUri(data?.data, this)
 
             binding.userPictureImageView.visibility = View.INVISIBLE
@@ -137,17 +145,21 @@ class RegisterActivity : AppCompatActivity() {
 
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_register_user, menu)
         return true
     }
 
     // add click listener in the menu
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        user = getFormData();
-        Toast.makeText(this, "$user", Toast.LENGTH_SHORT).show()
-        UserRepository(this).save(user)
-        return true
+        if (validateFormData()) {
+            val user = getFormData();
+            Toast.makeText(this, "$user", Toast.LENGTH_SHORT).show()
+            UserRepository(this).save(user)
+            finish()
+            return true
+        }
+        return false
     }
 }

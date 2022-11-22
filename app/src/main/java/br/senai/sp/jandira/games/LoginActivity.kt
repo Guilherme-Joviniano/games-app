@@ -8,6 +8,7 @@ import br.senai.sp.jandira.games.databinding.ActivityLoginBinding
 import br.senai.sp.jandira.games.model.ConsoleModel
 import br.senai.sp.jandira.games.model.UserModel
 import br.senai.sp.jandira.games.repository.ConsoleRepository
+import br.senai.sp.jandira.games.repository.GameRepository
 import br.senai.sp.jandira.games.repository.UserRepository
 
 class MainActivity : AppCompatActivity() {
@@ -54,13 +55,16 @@ class MainActivity : AppCompatActivity() {
          }
 
         binding.LoginButton.setOnClickListener {
-            if(!validateForm()) {
-                Toast.makeText(this, "Algum Campo nao foi corretamente preenchido", Toast.LENGTH_SHORT).show()
+            if (!validateForm()) {
+                Toast.makeText(
+                    this,
+                    "Algum Campo nao foi corretamente preenchido",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-            if(!authenticate()) {
+            if (!authenticate()) {
                 Toast.makeText(this, "Falha no login", Toast.LENGTH_SHORT).show()
-            }
-            else {
+            } else {
                 val openHomeUserHomeActivity = Intent(this, UserHomeActivity::class.java)
 
                 openHomeUserHomeActivity.putExtra("user_id", user?.userId)
@@ -68,5 +72,6 @@ class MainActivity : AppCompatActivity() {
                 startActivity(openHomeUserHomeActivity)
             }
         }
+
     }
 }

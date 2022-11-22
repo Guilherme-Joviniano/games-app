@@ -11,10 +11,10 @@ class ConsoleRepository(context: Context) {
     fun getAll(): List<ConsoleModel> {
         return db.getAll()
     }
-    fun getContactById(id: Int): ConsoleModel {
+    fun getConsoleById(id: Int): ConsoleModel {
         return db.getConsoleById(id)
     }
-    fun getContactByName(name: String): ConsoleModel {
+    fun getConsoleByName(name: String): ConsoleModel {
         return db.getConsoleByName(name)
     }
     fun save(console: ConsoleModel): Long {
