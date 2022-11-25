@@ -6,21 +6,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.senai.sp.jandira.games.adapters.GameRegisteredAdapter
 import br.senai.sp.jandira.games.databinding.ActivityUserHomeBinding
 import br.senai.sp.jandira.games.helpers.getBitmapFromByteArray
 import br.senai.sp.jandira.games.model.GameModel
+import br.senai.sp.jandira.games.model.UserModel
 import br.senai.sp.jandira.games.repository.UserRepository
 import java.time.Year
 
 class UserHomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserHomeBinding
     private lateinit var adapterGameRegisterd: GameRegisteredAdapter
-
+    private var user: UserModel? = null;
     private lateinit var gameList: List<GameModel>
-
     private var USER_ID: Int = 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,17 @@ class UserHomeActivity : AppCompatActivity() {
         binding = ActivityUserHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        USER_ID = intent.getIntExtra("user_id", -1)
+        Toast.makeText(this, "${checkLogin()}", Toast.LENGTH_SHORT).show()
+
+
+        if(checkLogin()) {
+            val sharedPreferences = getSharedPreferences("credentials", MODE_PRIVATE)
+            val email = sharedPreferences.getString("email", "") as String
+            user = UserRepository(this).getUserByEmail(email)
+        } else {
+            USER_ID = intent.getIntExtra("user_id", -1)
+            user = UserRepository(this).getUserById(USER_ID)
+        }
 
         // Change the title of the actionBar
         supportActionBar?.title = getString(R.string.actionBar_profile_title)
@@ -39,19 +50,19 @@ class UserHomeActivity : AppCompatActivity() {
                 ContextCompat.getColor(this, R.color.dark_blue)
             )
         )
+
         // setup the recyclerView
         setupGameRegisteredRecyclerView()
 
-        val user = UserRepository(this).getUserById(USER_ID)
         val age =
-            Year.now().value - ((user.birthday?.substring(user.birthday.toString().length - 4))?.toInt()
+            Year.now().value - ((user?.birthday?.substring(user?.birthday.toString().length - 4))?.toInt()
                 ?: Year.now().value)
 
-        binding.userName.text = user.user_name
-        binding.userEmail.text = user.email
-        binding.userLevel.text = user.level.toString()
+        binding.userName.text = user?.user_name
+        binding.userEmail.text = user?.email
+        binding.userLevel.text = user?.level.toString()
         binding.textViewUserAge.text = age.toString()
-        binding.userProfilePicture.setImageBitmap(getBitmapFromByteArray(user.user_picture))
+        binding.userProfilePicture.setImageBitmap(getBitmapFromByteArray(user?.user_picture))
 
         binding.finishedGamesTextView.text = getFinishedGamesSize().toString()
         binding.playingGamesTextView.text = getUnfinishedGameSize().toString()
@@ -81,7 +92,8 @@ class UserHomeActivity : AppCompatActivity() {
         binding.rvGameRegistered.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         this.adapterGameRegisterd = GameRegisteredAdapter(this)
-        gameList = updateGameList(USER_ID)
+        print(user?.userId)
+        gameList = updateGameList(user?.userId)
         bindGameRegistered(gameList)
         binding.rvGameRegistered.adapter = this.adapterGameRegisterd
     }
@@ -97,12 +109,12 @@ class UserHomeActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val openGameRegisterActivity = Intent(this, GameRegisterActivity::class.java)
-        openGameRegisterActivity.putExtra("user_id", USER_ID)
+        openGameRegisterActivity.putExtra("user_id", user?.userId)
         startActivity(openGameRegisterActivity)
         return true
     }
 
-    private fun updateGameList(id: Int): List<GameModel> {
+    private fun updateGameList(id: Int?): List<GameModel> {
         return UserRepository(this).getUserWithGames(id)[0].games
     }
     private fun updateUserInfo() {
@@ -113,7 +125,7 @@ class UserHomeActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         // updating the user game list
-        gameList = updateGameList(USER_ID)
+        gameList = updateGameList(user?.userId)
 
         // updating the Rv
         bindGameRegistered(gameList)
@@ -121,5 +133,12 @@ class UserHomeActivity : AppCompatActivity() {
         // updating the user info details
         updateUserInfo()
 
+    }
+
+    private fun checkLogin(): Boolean {
+        val sharedPreferences = getSharedPreferences("credentials", MODE_PRIVATE)
+        val email = sharedPreferences.getString("email", "") as String
+
+        return email.isNotEmpty()
     }
 }

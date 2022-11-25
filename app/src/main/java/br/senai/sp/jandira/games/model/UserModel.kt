@@ -9,19 +9,18 @@ import br.senai.sp.jandira.games.model.enums.Level
 import java.time.LocalDate
 
 @Entity(tableName = "tbl_user")
-class UserModel {
-    var user_name: String = ""
-    var email: String = ""
-    var password: String = ""
-    var city: String = ""
+data class UserModel (
+    var user_name: String,
+    var email: String,
+    var password: String,
+    var city: String,
     @ColumnInfo(name = "birthday")
-    var birthday: String? = null
-    var level: Level? = null
-
+    var birthday: String? = null,
+    var level: Level? = null,
     @Embedded
-    var console: ConsoleModel? = null
-    var gender: Char = 'm'
-    var user_picture: ByteArray = ByteArray(    0)
+    var console: ConsoleModel? = null,
+    var gender: Char = 'm',
+    var user_picture: ByteArray) {
     @PrimaryKey(autoGenerate = true)
     var userId: Int = 0
 }

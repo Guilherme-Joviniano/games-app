@@ -71,8 +71,15 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(this, "Preencha o campo de genero", Toast.LENGTH_SHORT).show()
             return false
         }
+
         if (binding.choosedImageImageView.visibility === View.INVISIBLE) {
             Toast.makeText(this, "Escolha uma foto de perfil!", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+
+        if (UserRepository(this).getUserByEmail(emailField.text.toString()) != null) {
+            Toast.makeText(this, "Email já cadastrado", Toast.LENGTH_SHORT).show()
             return false
         }
 
@@ -80,7 +87,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun getFormData(): UserModel {
-        var user = UserModel()
         var email = binding.EmailRegisterField.text.toString()
         var password = binding.passwordRegisterField.text.toString()
         var name = binding.nameField.text.toString()
@@ -91,17 +97,7 @@ class RegisterActivity : AppCompatActivity() {
         var console = ConsoleRepository(this).getConsoleByName(getSpinnerValue())
         var picture = getByteArrayFromBitmap(this.pictureBitmap)
 
-        user.email = email
-        user.password = password
-        user.user_name = name
-        user.city = city
-        user.birthday = birthday
-        user.level = level
-        user.gender = genre[0]
-        user.console = console
-        user.user_picture = picture
-
-        return user
+        return UserModel(user_name = name, email = email, password = password, city = city, birthday = birthday, level = level, console = console, gender = genre[0], user_picture = picture)
     }
 
     private fun getSpinnerValue(): String {

@@ -11,11 +11,11 @@ class UserRepository(context: Context) {
         return db.getAll()
     }
 
-    fun getUserByEmail(email: String): UserModel {
+    fun getUserByEmail(email: String?): UserModel {
         return db.getUserByEmail(email)
     }
 
-    fun getUserWithGames(id:Int): List<UserWithGamesModel> {
+    fun getUserWithGames(id:Int?): List<UserWithGamesModel> {
         return db.getUserWithGames(id)
     }
 
