@@ -1,29 +1,26 @@
-package br.senai.sp.jandira.games
+package br.senai.sp.jandira.games.ui
 
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.view.isEmpty
+import br.senai.sp.jandira.games.R
 import br.senai.sp.jandira.games.databinding.ActivityGameRegisterBinding
 import br.senai.sp.jandira.games.helpers.getBitmapFromUri
 import br.senai.sp.jandira.games.helpers.getByteArrayFromBitmap
 import br.senai.sp.jandira.games.model.GameModel
 import br.senai.sp.jandira.games.repository.GameRepository
-import java.io.ByteArrayOutputStream
 
 class GameRegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGameRegisterBinding
     private val IMAGE_REQUEST_CODE = 100
-    private var USER_ID = 0;
+    private var userId = 0;
     private var pictureBitmap: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +41,7 @@ class GameRegisterActivity : AppCompatActivity() {
         }
 
         // USER ID
-        USER_ID = getUserId()
+        userId = getUserId()
     }
 
 
@@ -98,7 +95,7 @@ class GameRegisterActivity : AppCompatActivity() {
             gameLaunchedYear = releasedYear,
             description = desc,
             completed = completed,
-            userCreatorId = USER_ID
+            userCreatorId = userId
         )
     }
 

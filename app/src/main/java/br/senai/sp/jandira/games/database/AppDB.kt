@@ -22,7 +22,7 @@ abstract class AppDB: RoomDatabase() {
     companion object {
         private lateinit var instance: AppDB
 
-        private fun registerConsoles(context: Context) {1
+        private fun registerConsoles(context: Context) {
             ConsoleRepository(context).save(ConsoleModel("PS5", "Sony", "Last sony console", ByteArray(1), 2021))
             ConsoleRepository(context).save(ConsoleModel("Xbox", "Microsoft", "Last microsoft console", ByteArray(1), 2021))
             ConsoleRepository(context).save(ConsoleModel("Nintendo Switch", "Nintendo", "Last Nintendo console", ByteArray(1), 2021))

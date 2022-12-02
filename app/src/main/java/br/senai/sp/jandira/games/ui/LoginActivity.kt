@@ -1,15 +1,11 @@
-package br.senai.sp.jandira.games
+package br.senai.sp.jandira.games.ui
 
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import br.senai.sp.jandira.games.databinding.ActivityLoginBinding
-import br.senai.sp.jandira.games.model.ConsoleModel
 import br.senai.sp.jandira.games.model.UserModel
-import br.senai.sp.jandira.games.repository.ConsoleRepository
-import br.senai.sp.jandira.games.repository.GameRepository
 import br.senai.sp.jandira.games.repository.UserRepository
 
 class MainActivity : AppCompatActivity() {
@@ -78,7 +74,7 @@ class MainActivity : AppCompatActivity() {
             val openRegisterActivity = Intent(this, RegisterActivity::class.java)
             startActivity(openRegisterActivity)
          }
-
+5
         binding.LoginButton.setOnClickListener {
             if (!validateForm()) {
                 Toast.makeText(
@@ -105,5 +101,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         checkLogin()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        removeLastCredentials()
+    }
+
+    private fun removeLastCredentials() {
+        val sharedPreferences = getSharedPreferences("credentials", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("email", "")
+        editor.commit()
     }
 }

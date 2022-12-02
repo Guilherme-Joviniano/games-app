@@ -1,4 +1,4 @@
-package br.senai.sp.jandira.games
+package br.senai.sp.jandira.games.ui
 
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
@@ -18,10 +18,9 @@ import br.senai.sp.jandira.games.repository.UserRepository
 import android.graphics.Bitmap
 
 import android.view.View
-import android.widget.EditText
+import br.senai.sp.jandira.games.R
 import br.senai.sp.jandira.games.helpers.getBitmapFromUri
 import br.senai.sp.jandira.games.helpers.getByteArrayFromBitmap
-import java.io.ByteArrayOutputStream
 
 
 class RegisterActivity : AppCompatActivity() {

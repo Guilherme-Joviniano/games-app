@@ -1,4 +1,4 @@
-package br.senai.sp.jandira.games
+package br.senai.sp.jandira.games.ui
 
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import br.senai.sp.jandira.games.R
 import br.senai.sp.jandira.games.adapters.GameRegisteredAdapter
 import br.senai.sp.jandira.games.databinding.ActivityUserHomeBinding
 import br.senai.sp.jandira.games.helpers.getBitmapFromByteArray
@@ -28,9 +28,6 @@ class UserHomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUserHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        Toast.makeText(this, "${checkLogin()}", Toast.LENGTH_SHORT).show()
-
 
         if(checkLogin()) {
             val sharedPreferences = getSharedPreferences("credentials", MODE_PRIVATE)
